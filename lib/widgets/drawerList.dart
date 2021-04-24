@@ -1,3 +1,4 @@
+import 'package:declutter_project/screens/ordersScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,14 +6,33 @@ import '../screens/settingScreen.dart';
 
 class DrawerList extends StatelessWidget {
   static const routName = '/drawer';
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.only(left: 15.0),
         child: Column(
           children: [
+            _buildListTile(
+                context,
+                Icon(FontAwesomeIcons.home),
+                'Home',
+                () => {
+                      Navigator.of(context).pop(),
+                      Navigator.of(context).pushReplacementNamed('/'),
+                    }),
+            Divider(),
+            _buildListTile(
+                context,
+                Icon(Icons.payment),
+                'My Orders',
+                () => {
+                      Navigator.of(context).pop(),
+                      Navigator.of(context)
+                          .pushReplacementNamed(OrdersScreen.routeName),
+                    }),
+            Divider(),
             _buildListTile(
                 context,
                 Icon(FontAwesomeIcons.wallet),
@@ -48,6 +68,7 @@ class DrawerList extends StatelessWidget {
                       Navigator.of(context).pop(),
                       Navigator.of(context).pushNamed(SettingsScreen.routName),
                     }),
+            Divider(),
           ],
         ),
       ),
@@ -66,7 +87,7 @@ class DrawerList extends StatelessWidget {
       title: Text(
         title,
         style:
-            GoogleFonts.workSans(fontSize: 18.0, fontWeight: FontWeight.w500),
+            GoogleFonts.workSans(fontSize: 17.0, fontWeight: FontWeight.w500),
       ),
     );
   }

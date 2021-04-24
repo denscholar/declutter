@@ -1,5 +1,5 @@
 import 'package:declutter_project/screens/HomeScreen.dart';
-import 'package:declutter_project/screens/sellScreen.dart';
+import 'package:declutter_project/screens/userProduct.dart';
 import 'package:declutter_project/screens/walletScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,7 +13,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
   List<Widget> _widgetOption = [
     HomeScreen(),
-    SellScreen(),
+    UserProductScreen(),
     WalletScreen(),
     Text('Message'),
   ];

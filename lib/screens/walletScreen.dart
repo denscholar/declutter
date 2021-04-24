@@ -1,5 +1,4 @@
 import 'package:declutter_project/custom/color.dart';
-import 'package:declutter_project/widgets/appBar.dart';
 import 'package:declutter_project/widgets/drawerBuild.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,8 +12,9 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBlue,
-      appBar: buildAppBar(context),
+      appBar: AppBar(
+        backgroundColor: Color(0XFFFF914D),
+      ),
       drawer: buildDrawerWidget(context),
       body: Container(
         decoration: BoxDecoration(

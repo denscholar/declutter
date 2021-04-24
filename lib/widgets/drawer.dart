@@ -12,30 +12,31 @@ class _DrawerHeadState extends State<DrawerHead> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0XFFEB9E02),
+      color: Color(0XFFFF914D),
       width: double.infinity,
-      height: 230,
+      height: 200,
       padding: EdgeInsets.only(top: 30.0),
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 25.0),
-            height: 100.0,
+            margin: const EdgeInsets.only(top: 30.0),
+            height: 80.0,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: NetworkImage(
-                        'https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg'))),
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage('assets/images/dennis.jpg'),
+              ),
+            ),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Text('Welcome! Anita',
-              style: GoogleFonts.workSans(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w600,
-                color: kWhite,
-              ))
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Welcome Dennis!',
+                style: GoogleFonts.charmonman(
+                  fontSize: 22.0,
+                  color: kWhite,
+                  fontWeight: FontWeight.w900
+                )),
+          )
         ],
       ),
     );

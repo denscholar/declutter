@@ -1,7 +1,10 @@
 import 'package:declutter_project/models/products.dart';
+import 'package:declutter_project/providers/cart.dart';
+import 'package:declutter_project/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../custom/color.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -11,9 +14,10 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(product.imageUrl);
+    final loadedProduct =
+        Provider.of<Products>(context).findById(product.productId);
+
     return Scaffold(
-        // backgroundColor: Color(0XFFEEEDF3),
         backgroundColor: Colors.white,
         body: ListView(
           children: [
@@ -22,14 +26,14 @@ class ProductScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Hero(
-                      tag: product.imageUrl,
+                      tag: loadedProduct.imageUrl,
                       child: ClipRRect(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(15),
                           bottomRight: Radius.circular(15.0),
                         ),
                         child: Image.network(
-                          product.imageUrl[0],
+                          loadedProduct.imageUrl,
                           height: 200.0,
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
@@ -47,8 +51,8 @@ class ProductScreen extends StatelessWidget {
                           IconButton(
                               icon: Icon(
                                 Icons.arrow_back_ios,
-                                color: Colors.white,
                                 size: 30.0,
+                                color: Colors.white,
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
@@ -75,19 +79,18 @@ class ProductScreen extends StatelessWidget {
                         children: [
                           Container(
                             width: 200,
-                            child: Expanded(
-                              child: Text(product.productTitle,
-                                  style: GoogleFonts.workSans(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.w600,
-                                    color: kBlue,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  ),
+                            child: Text(
+                              loadedProduct.productTitle,
+                              style: GoogleFonts.workSans(
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.w600,
+                                color: kBlue,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Text('Location: ${product.location}',
+                          Text('Location: ${loadedProduct.location}',
                               style: GoogleFonts.workSans(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w500,
@@ -102,7 +105,7 @@ class ProductScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           )),
                       SizedBox(height: 10),
-                      Text(product.productDesc,
+                      Text(loadedProduct.productDesc,
                           style: GoogleFonts.workSans(
                             fontSize: 17.0,
                             fontWeight: FontWeight.normal,
@@ -114,7 +117,7 @@ class ProductScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           )),
                       SizedBox(height: 10),
-                      Text(product.decReason,
+                      Text(loadedProduct.decReason,
                           style: GoogleFonts.workSans(
                             fontSize: 17.0,
                             fontWeight: FontWeight.normal,
@@ -149,7 +152,7 @@ class ProductScreen extends StatelessWidget {
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w500,
                               )),
-                          Text(product.productMarketPrice.toString(),
+                          Text(loadedProduct.productMarketPrice.toString(),
                               style: GoogleFonts.workSans(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.normal,
@@ -170,7 +173,7 @@ class ProductScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 color: kBlue,
                               )),
-                          Text(product.productPrice,
+                          Text(loadedProduct.productPrice.toString(),
                               style: GoogleFonts.workSans(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold,
@@ -202,7 +205,13 @@ class ProductScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Color(0XFFEB9E02),
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<Cart>(context, listen: false).addItem(
+              product.productId,
+              product.productPrice,
+              product.productTitle,
+            );
+          },
           icon: Icon(Icons.shopping_cart),
           label: Text("Add to Cart",
               style: GoogleFonts.workSans(

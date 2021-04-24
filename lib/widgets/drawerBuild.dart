@@ -5,7 +5,7 @@ import 'drawerList.dart';
 
 Drawer buildDrawerWidget(BuildContext context) {
     return Drawer(
-        elevation: 16,
+        elevation: 5,
         child: SingleChildScrollView(
           child: Container(
             child: Column(
