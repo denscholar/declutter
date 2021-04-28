@@ -56,6 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        // centerTitle: true,
+        title: Text('Declutter your clutter',
+            style: GoogleFonts.josefinSans(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w900,
+              color: kBlue,
+              letterSpacing: 3.0,
+            ),
+            
+            ),
         backgroundColor: Color(0XFFFF914D),
         actions: [
           Consumer<Cart>(
@@ -166,13 +176,17 @@ void _showBottomSheet(context) {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-                title: Text('Empty! Please add to your cart', style: GoogleFonts.workSans(
-                  fontSize: 18.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ) ),
-                leading: Icon(Icons.add_shopping_cart, color: kWhite, size: 50.0,),
-
+                title: Text('Empty! Please add to your cart',
+                    style: GoogleFonts.workSans(
+                      fontSize: 18.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )),
+                leading: Icon(
+                  Icons.add_shopping_cart,
+                  color: kWhite,
+                  size: 50.0,
+                ),
               ),
             ));
       });

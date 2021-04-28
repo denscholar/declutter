@@ -1,6 +1,7 @@
 import 'package:declutter_project/models/products.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -114,5 +115,49 @@ class Products with ChangeNotifier {
 
   Product findById(String id) {
     return _items.firstWhere((prod) => prod.productId == id);
+  }
+
+  void addProduct(Product product) {
+    // final url = Uri(https://declutterapp-872d6-default-rtdb.firebaseio.com/products.json');
+    // http.post(url, body: json.encode({
+    //   'productTitle': product.productTitle,
+    //   'category': product.category,
+    //   'decReason': product.decReason,
+    //   'productCondition': product.productCondition,
+    //   'productDesc': product.productDesc,
+    //   'productId': DateTime.now().toString(),
+    //   'productMarketPrice': product.productMarketPrice,
+    //   'productPrice': product.productPrice,
+    //   'imageUrl': product.imageUrl,
+    // }));
+
+    final newProduct = Product(
+      productTitle: product.productTitle,
+      category: product.category,
+      decReason: product.decReason,
+      productCondition: product.productCondition,
+      productDesc: product.productDesc,
+      productId: DateTime.now().toString(),
+      productMarketPrice: product.productMarketPrice,
+      productPrice: product.productPrice,
+      imageUrl: product.imageUrl,
+    );
+    _items.add(newProduct);
+    notifyListeners();
+  }
+
+  void updateProduct(String productId, Product newProduct) {
+    final _prodIndex = _items.indexWhere((prod) => prod.productId == productId);
+    if (_prodIndex >= 0) {
+      _items[_prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
+
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.productId == id);
+    notifyListeners();
   }
 }

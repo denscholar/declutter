@@ -24,6 +24,7 @@ class CartItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productData = Provider.of<Products>(context, listen: false);
     return Dismissible(
       background: Container(
         padding: const EdgeInsets.only(right: 20.0),
@@ -44,7 +45,6 @@ class CartItems extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
-              
               radius: 50.0,
               child: FittedBox(child: Text(price.toString())),
             ),
@@ -88,6 +88,8 @@ class CartItems extends StatelessWidget {
       },
       onDismissed: (directional) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
+            
+        
       },
     );
   }

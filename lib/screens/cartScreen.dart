@@ -19,6 +19,7 @@ class CartScreen extends StatelessWidget {
       drawer: buildDrawerWidget(context),
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Color(0XFFFF914D),
         title: Text('Your Cart'),
       ),
       body: Column(
@@ -29,8 +30,8 @@ class CartScreen extends StatelessWidget {
             child: Text('List of Cart Items', style: GoogleFonts.workSans(fontSize: 25.0),),
           ),
           Padding(
-            padding: const EdgeInsets.only(top:5.0, bottom: 15.0),
-            child: Text('Swipe left to delete any item you do not wish to buy', style: GoogleFonts.workSans(fontSize: 14.0)),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top:5.0, bottom: 10.0),
+            child: Text('Swipe left to delete any item you do not wish to buy', style: GoogleFonts.workSans(fontSize: 12.0, fontWeight: FontWeight.bold)),
           ),
           Expanded(
             child: ListView.builder(

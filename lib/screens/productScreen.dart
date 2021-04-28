@@ -211,6 +211,7 @@ class ProductScreen extends StatelessWidget {
               product.productPrice,
               product.productTitle,
             );
+            Navigator.of(context).pop();
           },
           icon: Icon(Icons.shopping_cart),
           label: Text("Add to Cart",
